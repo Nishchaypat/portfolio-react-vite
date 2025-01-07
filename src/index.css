@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add any custom styles here */
+html {
+  scroll-behavior: smooth;
+}
+
+/* For theme transitions */
+body {
+  transition: background-color 0.3s ease;
+}
+
+/* Optional: Add some custom utility classes */
+@layer utilities {
+  .glass-effect {
+    @apply bg-opacity-70 backdrop-blur-lg;
+  }
+}
