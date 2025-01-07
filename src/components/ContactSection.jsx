@@ -49,7 +49,7 @@ const ContactSection = () => {
         <div className="relative">
           <div className="pt-16 pb-12">
             <div className="text-center">
-              <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+              <h2 className="text-3xl font-extrabold text-gray-500 sm:text-4xl">
                 Get in touch
               </h2>
               <p className="mt-4 text-lg text-gray-500">
