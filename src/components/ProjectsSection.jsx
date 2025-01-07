@@ -76,8 +76,7 @@ const ProjectsSection = () => {
         "Streamlines candidate search with advanced filters and AI chatbot"
       ],
       technologies: ["Python", "Django", "AWS", "Google Cloud", "Gemini AI", "React"],
-      github: "#",
-      live: "#"
+      live: "https://careerwideai.com/"
     },
     {
       title: "Stock Track",
@@ -89,8 +88,8 @@ const ProjectsSection = () => {
         "Delivers tailored stock forecasts for enhanced user experience"
       ],
       technologies: ["Python", "TensorFlow", "MySQL", "React", "AWS RDS"],
-      github: "#",
-      live: "#"
+      github: "https://github.com/Nishchaypat/StockTrack-React",
+      live: "https://aistockvision.netlify.app/"
     },
     {
       title: "Tweet Sentiment Analysis",
@@ -102,8 +101,7 @@ const ProjectsSection = () => {
         "Provides instant sentiment analysis results"
       ],
       technologies: ["Python", "BERT", "LSTM", "TensorFlow", "Glove"],
-      github: "#",
-      live: "#"
+      github: "https://github.com/Nishchaypat/FEMA",
     },
     {
       title: "Law Chat Bot",
@@ -115,8 +113,7 @@ const ProjectsSection = () => {
         "Reduced query processing time by 10%"
       ],
       technologies: ["Python", "Llama", "SQL", "Qdrant", "LLM"],
-      github: "#",
-      live: "#"
+      github: "https://github.com/Nishchaypat/LawChatBot",
     }
   ];
 

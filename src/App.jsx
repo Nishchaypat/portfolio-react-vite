@@ -6,6 +6,7 @@ import ExperienceSection from './components/ExperienceSection';
 import ProjectsSection from './components/ProjectsSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
+import WorkingOnSection from './components/WorkingOnSection';
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -33,10 +34,10 @@ const App = () => {
       <div className="relative">
         <NavigationBar />
         <main>
-          {/* Hero Section is included in NavigationBar */}
           <AboutSection />
           <ExperienceSection />
           <ProjectsSection />
+          <WorkingOnSection />
           <ContactSection />
         </main>
         <Footer />

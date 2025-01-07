@@ -81,9 +81,9 @@ const WorkingOnSection = () => {
   ];
 
   return (
-    <Section theme={currentTheme} className={`${currentTheme.background.primary} p-8`}>
+    <Section theme={currentTheme}>
       <Container>
-        <Title theme={currentTheme} className={currentTheme.text.primary}>Currently Working On</Title>
+        <Title theme={currentTheme}>Currently Working On</Title>
         <List>
           <ListItem theme={currentTheme} delay="0.2s">"Athlyze" - An Advanced Agentic RAG for gym and athletic building.</ListItem>
           <ListItem theme={currentTheme} delay="0.4s">Using machine learning for biological predictions.</ListItem>
@@ -91,7 +91,7 @@ const WorkingOnSection = () => {
           <ListItem theme={currentTheme} delay="0.8s">Scheduling tasks based on user limitations and notes.</ListItem>
         </List>
 
-        <Title theme={currentTheme} className={currentTheme.text.primary}>Technologies I am using</Title>
+        <Title theme={currentTheme}>Technologies I am using</Title>
         <List>
           {technologies.map((tech, index) => (
             <ListItem key={index} theme={currentTheme} delay={`${1 + index * 0.2}s`}>
