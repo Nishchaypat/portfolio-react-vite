@@ -20,78 +20,70 @@ const fadeIn = keyframes`
 const fadeInItem = keyframes`
   from {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
 `;
 
 const Section = styled.section`
-  padding: 5rem 0;
-  background-color: ${(props) => props.theme.background.primary};
-  animation: ${fadeIn} 1s ease-in-out;
+  animation: ${fadeIn} 1s ease-out;
 `;
 
 const Container = styled.div`
-  max-width: 1120px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 2rem;
 `;
 
 const Title = styled.h2`
-  font-size: 2.25rem;
-  font-weight: 800;
-  text-align: center;
-  color: ${(props) => props.theme.text.primary};
-  margin-bottom: 2rem;
-  animation: ${fadeIn} 1.2s ease-in-out;
+  font-size: 2rem;
+  color: ${({ theme }) => theme.text.primary};
 `;
 
 const List = styled.ul`
-  list-style-type: disc;
-  padding-left: 2rem;
-  margin: 0;
-  color: ${(props) => props.theme.text.secondary};
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 const ListItem = styled.li`
-  font-size: 1.125rem;
-  margin-bottom: 1rem;
+  flex: 1 1 30%;
+  margin: 1rem;
+  padding: 1rem;
+  background-color: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.text.primary};
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  animation: ${fadeInItem} 0.5s ease-out ${({ delay }) => delay} forwards;
   opacity: 0;
-  animation: ${fadeInItem} 1s ease-in-out forwards;
-  animation-delay: ${(props) => props.delay || '0s'};  /* Delay for staggered animation */
 `;
 
-const IconWrapper = styled.span`
-  font-size: 1.5rem;
-  margin-right: 0.5rem;
+const IconWrapper = styled.div`
+  margin-right: 1rem;
+  font-size: 2rem;
 `;
 
 const WorkingOnSection = () => {
   const { currentTheme } = useTheme();
-
   const technologies = [
-    { name: 'Python', icon: <FaPython /> },
     { name: 'React', icon: <FaReact /> },
+    { name: 'JavaScript', icon: '🟨' },
+    { name: 'Python', icon: <FaPython /> },
     { name: 'Langchain', icon: <SiLangchain /> },
-    { name: 'DataStax', icon: <SiDatastax /> },
-    { name: 'Machine Learning', icon: <SiTensorflow /> },
+    { name: 'Datastax', icon: <SiDatastax /> },
+    { name: 'TensorFlow', icon: <SiTensorflow /> },
+    // Add more technologies as needed
   ];
 
   return (
-    <Section theme={currentTheme}>
+    <Section>
       <Container>
-        <Title theme={currentTheme}>Currently Working On</Title>
-        <List>
-          <ListItem theme={currentTheme} delay="0.2s">"Athlyze" - An Advanced Agentic RAG for gym and athletic building.</ListItem>
-          <ListItem theme={currentTheme} delay="0.4s">Using machine learning for biological predictions.</ListItem>
-          <ListItem theme={currentTheme} delay="0.6s">Storing research-backed information in a vectorized database.</ListItem>
-          <ListItem theme={currentTheme} delay="0.8s">Scheduling tasks based on user limitations and notes.</ListItem>
-        </List>
-
-        <Title theme={currentTheme}>Technologies I am using</Title>
+        <Title theme={currentTheme} className={currentTheme.text.primary}>Technologies I am using</Title>
         <List>
           {technologies.map((tech, index) => (
             <ListItem key={index} theme={currentTheme} delay={`${1 + index * 0.2}s`}>

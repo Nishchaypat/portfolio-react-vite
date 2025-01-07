@@ -1,108 +1,79 @@
-import React from 'react';
-import { useTheme } from '../context/ThemeContext';
-import styled, { keyframes } from 'styled-components';
-import { FaPython, FaReact } from "react-icons/fa";
-import { SiLangchain, SiDatastax, SiTensorflow } from "react-icons/si";
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
-// Fade-in animation for Section
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+const ThemeContext = createContext();
+
+export const themes = {
+  light: {
+    primary: 'blue',
+    secondary: 'purple',
+    accent: 'pink',
+    background: {
+      primary: 'bg-gray-50',
+      secondary: 'bg-white',
+      accent: 'bg-blue-50'
+    },
+    text: {
+      primary: 'text-gray-900',
+      secondary: 'text-gray-600',
+      accent: 'text-blue-600'
+    },
+    border: {
+      primary: 'border-gray-200',
+      secondary: 'border-blue-200',
+      accent: 'border-purple-200'
+    }
+  },
+  dark: {
+    primary: 'blue',
+    secondary: 'purple',
+    accent: 'pink',
+    background: {
+      primary: 'bg-gray-900',
+      secondary: 'bg-gray-800',
+      accent: 'bg-blue-900'
+    },
+    text: {
+      primary: 'text-white',
+      secondary: 'text-gray-300',
+      accent: 'text-blue-400'
+    },
+    border: {
+      primary: 'border-gray-700',
+      secondary: 'border-blue-700',
+      accent: 'border-purple-700'
+    }
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
-
-// Staggered fade-in for list items
-const fadeInItem = keyframes`
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-`;
-
-const Section = styled.section`
-  padding: 5rem 0;
-  background-color: ${(props) => props.theme.background.primary};
-  animation: ${fadeIn} 1s ease-in-out;
-`;
-
-const Container = styled.div`
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 1rem;
-`;
-
-const Title = styled.h2`
-  font-size: 2.25rem;
-  font-weight: 800;
-  text-align: center;
-  color: ${(props) => props.theme.text.primary};
-  margin-bottom: 2rem;
-  animation: ${fadeIn} 1.2s ease-in-out;
-`;
-
-const List = styled.ul`
-  list-style-type: disc;
-  padding-left: 2rem;
-  margin: 0;
-  color: ${(props) => props.theme.text.secondary};
-`;
-
-const ListItem = styled.li`
-  font-size: 1.125rem;
-  margin-bottom: 1rem;
-  opacity: 0;
-  animation: ${fadeInItem} 1s ease-in-out forwards;
-  animation-delay: ${(props) => props.delay || '0s'};  /* Delay for staggered animation */
-`;
-
-const IconWrapper = styled.span`
-  font-size: 1.5rem;
-  margin-right: 0.5rem;
-`;
-
-const WorkingOnSection = () => {
-  const { currentTheme } = useTheme();
-
-  const technologies = [
-    { name: 'Python', icon: <FaPython /> },
-    { name: 'React', icon: <FaReact /> },
-    { name: 'Langchain', icon: <SiLangchain /> },
-    { name: 'DataStax', icon: <SiDatastax /> },
-    { name: 'Machine Learning', icon: <SiTensorflow /> },
-  ];
-
-  return (
-    <Section theme={currentTheme} className={`${currentTheme.background.primary} p-8`}>
-      <Container>
-        <Title theme={currentTheme} className={currentTheme.text.primary}>Currently Working On</Title>
-        <List>
-          <ListItem theme={currentTheme} delay="0.2s">"Athlyze" - An Advanced Agentic RAG for gym and athletic building.</ListItem>
-          <ListItem theme={currentTheme} delay="0.4s">Using machine learning for biological predictions.</ListItem>
-          <ListItem theme={currentTheme} delay="0.6s">Storing research-backed information in a vectorized database.</ListItem>
-          <ListItem theme={currentTheme} delay="0.8s">Scheduling tasks based on user limitations and notes.</ListItem>
-        </List>
-
-        <Title theme={currentTheme} className={currentTheme.text.primary}>Technologies I am using</Title>
-        <List>
-          {technologies.map((tech, index) => (
-            <ListItem key={index} theme={currentTheme} delay={`${1 + index * 0.2}s`}>
-              <IconWrapper>{tech.icon}</IconWrapper>
-              {tech.name}
-            </ListItem>
-          ))}
-        </List>
-      </Container>
-    </Section>
-  );
 };
 
-export default WorkingOnSection;
+// Export the custom hook correctly
+export const useTheme = () => useContext(ThemeContext);
+
+export const ThemeProvider = ({ children }) => {
+  const [theme, setTheme] = useState('light');
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    document.documentElement.classList.add('transition-colors', 'duration-300');
+    setIsLoading(false);
+  }, []);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
+
+  if (isLoading) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme, currentTheme: themes[theme] }}>
+      <div className={`${themes[theme].background.primary} min-h-screen transition-colors duration-300`}>
+        {children}
+      </div>
+    </ThemeContext.Provider>
+  );
+};
