@@ -44,7 +44,7 @@ const Button = styled.a`
 
 const ContactSection = () => {
   return (
-    <section className="relative">
+    <section id="contact" className="relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative">
           <div className="pt-16 pb-12">
