@@ -1,6 +1,21 @@
 import React, { useState } from 'react';
 import { Github, ExternalLink, Tag, Code2 } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJs, FaPython, FaAws, FaGoogle, FaGem, FaDatabase } from 'react-icons/fa';
+
+const techIcons = {
+  react: <FaReact />,
+  nodejs: <FaNodeJs />,
+  html5: <FaHtml5 />,
+  css3: <FaCss3Alt />,
+  javascript: <FaJs />,
+  python: <FaPython />,
+  aws: <FaAws />,
+  'google cloud': <FaGoogle />,
+  'gemini ai': <FaGem />,
+  mysql: <FaDatabase />,
+  // Add more technologies and their corresponding icons here
+};
 
 const ProjectCard = ({ project, isHovered, onHover, onLeave }) => {
   const { currentTheme } = useTheme();
@@ -13,6 +28,35 @@ const ProjectCard = ({ project, isHovered, onHover, onLeave }) => {
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
     >
+      <div
+        className={`relative bg-gray-200 h-64 flex items-center justify-center rounded-xl overflow-hidden shadow-sm transition-all transform ${
+          isHovered ? 'scale-[1.02] shadow-md' : ''
+        }`}
+      >
+        {project.image ? (
+          <a
+            href={project.live}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center"
+          >
+            <img
+              src={project.image}
+              alt={`${project.title} Preview`}
+              className="max-w-full max-h-full object-cover"
+            />
+          </a>
+        ) : project.live ? (
+          <iframe
+            src={project.live}
+            className="w-full h-full border-none rounded-xl"
+            title={project.title}
+          ></iframe>
+        ) : (
+          <p className="text-gray-500">No preview available</p>
+        )}
+      </div>
+
       <div className="p-6">
         <div className="flex justify-between items-start">
           <h3 className={`text-xl font-bold ${currentTheme.text.primary}`}>{project.title}</h3>
@@ -50,7 +94,7 @@ const ProjectCard = ({ project, isHovered, onHover, onLeave }) => {
                 key={idx}
                 className={`inline-flex items-center px-3 py-1 ${currentTheme.background.accent} ${currentTheme.text.accent} rounded-full text-sm`}
               >
-                <Tag className="w-3 h-3 mr-1" />
+                {techIcons[tech.toLowerCase()] || <Tag className="w-3 h-3 mr-1" />}
                 {tech}
               </span>
             ))}
@@ -76,7 +120,8 @@ const ProjectsSection = () => {
         "Streamlines candidate search with advanced filters and AI chatbot"
       ],
       technologies: ["Python", "Django", "AWS", "Google Cloud", "Gemini AI", "React"],
-      live: "https://careerwideai.com/"
+      live: "https://careerwideai.com/",
+      image: "src/assets/careerwide.png",
     },
     {
       title: "Stock Track",
@@ -102,6 +147,7 @@ const ProjectsSection = () => {
       ],
       technologies: ["Python", "BERT", "LSTM", "TensorFlow", "Glove"],
       github: "https://github.com/Nishchaypat/FEMA",
+      image: "src/assets/fema.png",
     },
     {
       title: "Law Chat Bot",
@@ -114,6 +160,7 @@ const ProjectsSection = () => {
       ],
       technologies: ["Python", "Llama", "SQL", "Qdrant", "LLM"],
       github: "https://github.com/Nishchaypat/LawChatBot",
+      image: "src/assets/lawchatbot.png",
     }
   ];
 

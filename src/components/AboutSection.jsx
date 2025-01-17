@@ -1,13 +1,48 @@
 import React from 'react';
 import { Book, Award, Code, Settings } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import { FaPython, FaJs, FaHtml5, FaLanguage, FaCss3Alt, FaMicrophone, FaJava, FaDatabase, FaReact, FaNodeJs, FaAws, FaGoogle, FaDocker, FaGitAlt, FaCode, FaCloud, FaBrain } from 'react-icons/fa';
 
 const AboutSection = () => {
   const { currentTheme } = useTheme();
   const skills = {
-    languages: ['Python', 'JavaScript', 'HTML', 'CSS', 'Java', 'SQL', 'NoSQL', 'C'],
-    frameworks: ['Django', 'React', 'Node.js', 'Git', 'Flask', 'Lang-chain', 'Scrum (Agile)', 'ETL', 'Apache Spark', 'BERT'],
-    tools: ['AWS', 'REST API', 'Google Cloud Services', 'TensorFlow', 'PyTorch', 'Generative AI', 'NLP', 'LLM', 'Audio Processing', 'Librosa', 'Docker', 'IBM Watson', 'Langflow']
+    languages: [
+      { name: 'Python', icon: <FaPython /> },
+      { name: 'JavaScript', icon: <FaJs /> },
+      { name: 'HTML', icon: <FaHtml5 /> },
+      { name: 'CSS', icon: <FaCss3Alt /> },
+      { name: 'Java', icon: <FaJava /> },
+      { name: 'SQL', icon: <FaDatabase /> },
+      { name: 'NoSQL', icon: <FaDatabase /> },
+      { name: 'C', icon: <FaCode /> }
+    ],
+    frameworks: [
+      { name: 'Django', icon: <FaPython /> },
+      { name: 'React', icon: <FaReact /> },
+      { name: 'Node.js', icon: <FaNodeJs /> },
+      { name: 'Git', icon: <FaGitAlt /> },
+      { name: 'Flask', icon: <FaPython /> },
+      { name: 'Lang-chain', icon: <FaCode /> },
+      { name: 'Scrum (Agile)', icon: <FaCode /> },
+      { name: 'ETL', icon: <FaDatabase /> },
+      { name: 'Apache Spark', icon: <FaCode /> },
+      { name: 'BERT', icon: <FaCode /> }
+    ],
+    tools: [
+      { name: 'AWS', icon: <FaAws /> },
+      { name: 'REST API', icon: <FaCode /> },
+      { name: 'Google Cloud Services', icon: <FaGoogle /> },
+      { name: 'TensorFlow', icon: <FaBrain /> },
+      { name: 'PyTorch', icon: <FaBrain /> },
+      { name: 'Generative AI', icon: <FaBrain /> },
+      { name: 'NLP', icon: <FaLanguage /> },
+      { name: 'LLM', icon: <Fasquare-binary />},
+      { name: 'Audio Processing', icon: <FaCode /> },
+      { name: 'Librosa', icon: <FaMicrophone /> },
+      { name: 'Docker', icon: <FaDocker /> },
+      { name: 'IBM Watson', icon: <FaCloud /> },
+      { name: 'Langflow', icon: <FaCloud /> }
+    ]
   };
 
   const certifications = [
@@ -59,10 +94,11 @@ const AboutSection = () => {
             <div className="flex flex-wrap gap-2">
               {skills.languages.map((skill) => (
                 <span
-                  key={skill}
-                  className={`px-3 py-1 ${currentTheme.background.accent} ${currentTheme.text.accent} rounded-full text-sm`}
+                  key={skill.name}
+                  className={`flex items-center px-3 py-1 ${currentTheme.background.accent} ${currentTheme.text.accent} rounded-full text-sm`}
                 >
-                  {skill}
+                  {skill.icon}
+                  <span className="ml-2">{skill.name}</span>
                 </span>
               ))}
             </div>
@@ -77,10 +113,11 @@ const AboutSection = () => {
             <div className="flex flex-wrap gap-2">
               {skills.frameworks.map((skill) => (
                 <span
-                  key={skill}
-                  className={`px-3 py-1 ${currentTheme.background.accent} ${currentTheme.text.accent} rounded-full text-sm`}
+                  key={skill.name}
+                  className={`flex items-center px-3 py-1 ${currentTheme.background.accent} ${currentTheme.text.accent} rounded-full text-sm`}
                 >
-                  {skill}
+                  {skill.icon}
+                  <span className="ml-2">{skill.name}</span>
                 </span>
               ))}
             </div>
@@ -95,10 +132,11 @@ const AboutSection = () => {
             <div className="flex flex-wrap gap-2">
               {skills.tools.map((skill) => (
                 <span
-                  key={skill}
-                  className={`px-3 py-1 ${currentTheme.background.accent} ${currentTheme.text.accent} rounded-full text-sm`}
+                  key={skill.name}
+                  className={`flex items-center px-3 py-1 ${currentTheme.background.accent} ${currentTheme.text.accent} rounded-full text-sm`}
                 >
-                  {skill}
+                  {skill.icon}
+                  <span className="ml-2">{skill.name}</span>
                 </span>
               ))}
             </div>
