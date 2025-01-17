@@ -13,7 +13,8 @@ const NavigationBar = () => {
     { name: 'Experience', href: '#experience' },
     { name: 'Projects', href: '#projects' },
     { name: 'Contact', href: '#contact' }, 
-    { name: 'Currently Working On?', href: '#workingon' }
+    { name: 'Currently Working On?', href: '#workingon' },
+    { name: 'Interest', href: '#interests' }
   ];
 
   useEffect(() => {

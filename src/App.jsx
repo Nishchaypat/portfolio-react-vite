@@ -7,6 +7,7 @@ import ProjectsSection from './components/ProjectsSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import WorkingOnSection from './components/WorkingOnSection';
+import Interests from './components/InterestSection';
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -38,6 +39,7 @@ const App = () => {
           <ExperienceSection />
           <ProjectsSection />
           <WorkingOnSection />
+          <Interests />
           <ContactSection />
         </main>
         <Footer />
