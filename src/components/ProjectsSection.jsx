@@ -121,7 +121,7 @@ const ProjectsSection = () => {
       ],
       technologies: ["Python", "Django", "AWS", "Google Cloud", "Gemini AI", "React"],
       live: "https://careerwideai.com/",
-      image: "src/assets/careerwide.png",
+      image: "CareerWide.png",
     },
     {
       title: "Stock Track",
@@ -147,7 +147,7 @@ const ProjectsSection = () => {
       ],
       technologies: ["Python", "BERT", "LSTM", "TensorFlow", "Glove"],
       github: "https://github.com/Nishchaypat/FEMA",
-      image: "src/assets/fema.png",
+      image: "fema.png",
     },
     {
       title: "Law Chat Bot",
@@ -160,7 +160,7 @@ const ProjectsSection = () => {
       ],
       technologies: ["Python", "Llama", "SQL", "Qdrant", "LLM"],
       github: "https://github.com/Nishchaypat/LawChatBot",
-      image: "src/assets/lawchatbot.png",
+      image: "lawchatbot.png",
     }
   ];
 
