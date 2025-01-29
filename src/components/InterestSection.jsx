@@ -91,7 +91,7 @@ const InterestSection = () => {
             <div
               key={index}
               className={`rounded-xl transition-all duration-300 transform 
-                ${hoveredCard === index ? 'scale-[1.02]' : ''} 
+                ${hoveredCard === index ? 'scale-[1.01]' : ''} 
                 ${currentTheme.background.secondary} p-6`}
               onMouseEnter={() => setHoveredCard(index)}
               onMouseLeave={() => setHoveredCard(null)}
