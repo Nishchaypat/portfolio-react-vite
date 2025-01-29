@@ -3,9 +3,8 @@ import {
   Activity, 
   Globe2, 
   TrendingUp,
-  ChevronRight,
+  X,
   Monitor,
-  Building2,
   ShoppingCart,
   Cpu,
   MessageSquare,
@@ -13,7 +12,6 @@ import {
   Shirt,
   Coffee,
   Wallet,
-  ChevronDown,
   Banknote,
   Binary,
   LineChart,
@@ -25,6 +23,7 @@ import {
   Cookie,
   Building
 } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 const companyDetails = {
   AAPL: { name: 'Apple', sector: 'Technology', industry: 'Consumer Electronics', icon: Apple },
@@ -52,8 +51,9 @@ const companyDetails = {
 };
 
 const InterestSection = () => {
+  const { currentTheme } = useTheme();
   const [selectedCompany, setSelectedCompany] = useState(null);
-  const [isStocksOpen, setIsStocksOpen] = useState(false);
+  const [hoveredCard, setHoveredCard] = useState(null);
 
   const interests = [
     {
@@ -75,64 +75,62 @@ const InterestSection = () => {
   ];
 
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32 bg-background">
-      <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+    <section id="interests" className={`py-20 ${currentTheme.background.primary}`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className={`text-3xl font-bold ${currentTheme.text.primary} sm:text-4xl`}>
             Areas of Interest
           </h2>
-          <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
+          <p className={`mt-4 text-lg ${currentTheme.text.secondary}`}>
             Exploring diverse passions and continuous learning through various interests
           </p>
         </div>
 
-        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-3 lg:gap-8 mt-8">
+        <div className="flex flex-col gap-8">
           {interests.map((interest, index) => (
-            <div 
-              key={index} 
-              className="relative group bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 p-6"
+            <div
+              key={index}
+              className={`rounded-xl transition-all duration-300 transform 
+                ${hoveredCard === index ? 'scale-[1.02]' : ''} 
+                ${currentTheme.background.secondary} p-6`}
+              onMouseEnter={() => setHoveredCard(index)}
+              onMouseLeave={() => setHoveredCard(null)}
             >
-              <div className="flex items-center space-x-4 mb-4">
-                <div className="p-2 rounded-full bg-blue-100 dark:bg-blue-900">
-                  <interest.icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              <div className="flex items-center space-x-4 mb-6">
+                <div className="p-3 rounded-full bg-blue-100 dark:bg-blue-900">
+                  <interest.icon className="w-6 h-6 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-semibold">{interest.title}</h3>
+                <h3 className={`text-xl font-bold ${currentTheme.text.primary}`}>
+                  {interest.title}
+                </h3>
               </div>
               
-              <p className="text-sm text-gray-600 dark:text-gray-300">
+              <p className={`${currentTheme.text.secondary} mb-6`}>
                 {interest.description}
               </p>
 
               {interest.hasStocks && (
                 <div className="mt-4">
-                  <button
-                    onClick={() => setIsStocksOpen(!isStocksOpen)}
-                    className="flex items-center justify-between w-full px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-                  >
-                    <span>View Tracked Companies</span>
-                    <ChevronDown className={`w-4 h-4 transition-transform ${isStocksOpen ? 'rotate-180' : ''}`} />
-                  </button>
-                  
-                  {isStocksOpen && (
-                    <div className="mt-2 space-y-2 max-h-96 overflow-y-auto">
-                      {Object.entries(companyDetails).map(([symbol, company]) => {
-                        const IconComponent = company.icon;
-                        return (
-                          <div
-                            key={symbol}
-                            className="flex items-center justify-between p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer group"
-                            onClick={() => setSelectedCompany(symbol)}
-                          >
-                            <div className="flex items-center space-x-2">
-                              <IconComponent className="w-4 h-4" />
-                              <span className="text-sm">{company.name}</span>
-                            </div>
-                            <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-                          </div>
-                        );
-                      })}
-                    </div>
-                  )}
+                  <div className="grid grid-cols-4 sm:grid-cols-8 md:grid-cols-11 gap-3">
+                    {Object.entries(companyDetails).map(([symbol, company]) => {
+                      const IconComponent = company.icon;
+                      return (
+                        <button
+                          key={symbol}
+                          onClick={() => setSelectedCompany(symbol)}
+                          className={`group flex flex-col items-center p-2 rounded-lg
+                            ${currentTheme.background.accent} hover:bg-blue-600
+                            transition-colors duration-200`}
+                          title={`${company.name} (${symbol})`}
+                        >
+                          <IconComponent className={`w-5 h-5 ${currentTheme.text.accent} group-hover:text-white`} />
+                          <span className={`text-xs mt-1 ${currentTheme.text.accent} group-hover:text-white`}>
+                            {symbol}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
             </div>
@@ -141,27 +139,36 @@ const InterestSection = () => {
 
         {selectedCompany && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-md">
+            <div className={`${currentTheme.background.secondary} rounded-xl w-full max-w-md`}>
               <div className="p-6">
-                <div className="flex items-center space-x-2 mb-4">
-                  {(() => {
-                    const IconComponent = companyDetails[selectedCompany].icon;
-                    return <IconComponent className="w-6 h-6" />;
-                  })()}
-                  <h3 className="text-xl font-semibold">
-                    {companyDetails[selectedCompany].name} ({selectedCompany})
-                  </h3>
+                <div className="flex justify-between items-center mb-6">
+                  <div className="flex items-center space-x-3">
+                    {(() => {
+                      const IconComponent = companyDetails[selectedCompany].icon;
+                      return <IconComponent className={`w-6 h-6 ${currentTheme.text.primary}`} />;
+                    })()}
+                    <h3 className={`text-xl font-bold ${currentTheme.text.primary}`}>
+                      {companyDetails[selectedCompany].name}
+                    </h3>
+                  </div>
+                  <button
+                    onClick={() => setSelectedCompany(null)}
+                    className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
                 </div>
-                <div className="space-y-2">
-                  <p><strong>Sector:</strong> {companyDetails[selectedCompany].sector}</p>
-                  <p><strong>Industry:</strong> {companyDetails[selectedCompany].industry}</p>
+                <div className="space-y-4">
+                  <div className={`${currentTheme.background.accent} ${currentTheme.text.accent} p-3 rounded-lg`}>
+                    <p className="font-medium">Ticker: {selectedCompany}</p>
+                  </div>
+                  <div className={`${currentTheme.background.accent} ${currentTheme.text.accent} p-3 rounded-lg`}>
+                    <p className="font-medium">Sector: {companyDetails[selectedCompany].sector}</p>
+                  </div>
+                  <div className={`${currentTheme.background.accent} ${currentTheme.text.accent} p-3 rounded-lg`}>
+                    <p className="font-medium">Industry: {companyDetails[selectedCompany].industry}</p>
+                  </div>
                 </div>
-                <button 
-                  onClick={() => setSelectedCompany(null)}
-                  className="mt-6 w-full bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 rounded-lg transition-colors"
-                >
-                  Close
-                </button>
               </div>
             </div>
           </div>
