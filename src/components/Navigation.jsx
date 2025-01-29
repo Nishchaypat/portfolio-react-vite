@@ -11,10 +11,10 @@ const NavigationBar = () => {
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Experience', href: '#experience' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' }, 
+    { name: 'Projects', href: '#projects' }, 
     { name: 'Currently Working On?', href: '#workingon' },
-    { name: 'Interest', href: '#interests' }
+    { name: 'Interest', href: '#interests' },
+    { name: 'Contact', href: '#contact' },
   ];
 
   useEffect(() => {
