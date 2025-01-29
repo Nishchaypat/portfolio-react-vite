@@ -79,10 +79,10 @@ const InterestSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className={`text-3xl font-bold ${currentTheme.text.primary} sm:text-4xl`}>
-            Areas of Interest
+            Hobbies
           </h2>
           <p className={`mt-4 text-lg ${currentTheme.text.secondary}`}>
-            Exploring diverse passions and continuous learning through various interests
+            Some of my hobbies includes:
           </p>
         </div>
 
